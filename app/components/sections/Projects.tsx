@@ -11,7 +11,7 @@ export function Projects() {
     <section id="projects" className="bg-surface py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <SectionTitle subtitle="A selection of projects I've built">
-          Projects
+          Personal projects
         </SectionTitle>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -48,24 +48,10 @@ export function Projects() {
                   {project.name}
                 </h3>
 
-                <p className="text-text-muted text-sm leading-relaxed mb-4">
+                <p className="text-text-muted text-sm leading-relaxed">
                   {project.description}
                 </p>
 
-                {project.url !== '#' ? (
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-sm font-medium text-orange hover:text-orange/80 transition-colors"
-                  >
-                    View project →
-                  </a>
-                ) : (
-                  <span className="inline-flex items-center gap-1 text-sm font-medium text-text-muted">
-                    Confidential / Coming soon
-                  </span>
-                )}
               </div>
             </motion.div>
           ))}
