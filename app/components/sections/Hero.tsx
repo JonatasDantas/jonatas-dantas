@@ -7,9 +7,9 @@ import { Button } from '@/components/ui/Button'
 
 const TYPING_WORDS = [
   'Senior Software Engineer',
-  'Full-Stack Developer',
-  'JavaScript / TypeScript Expert',
   'AWS Certified Developer',
+  'AI Engineer',
+  'JavaScript / TypeScript Expert',
 ]
 
 export function Hero() {

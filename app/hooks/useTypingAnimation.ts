@@ -4,9 +4,9 @@ import { useState, useEffect, useRef } from 'react'
 
 export function useTypingAnimation(
   words: string[],
-  typingSpeed = 80,
-  deletingSpeed = 40,
-  pauseMs = 1500,
+  typingSpeed = 90,
+  deletingSpeed = 50,
+  pauseMs = 2500,
 ): string {
   const [text, setText] = useState('')
   const [phase, setPhase] = useState<'typing' | 'deleting'>('typing')
@@ -37,8 +37,11 @@ export function useTypingAnimation(
         }, deletingSpeed)
         return () => clearTimeout(timer)
       } else {
-        wordIndex.current = (wordIndex.current + 1) % words.length
-        setPhase('typing')
+        const timer = setTimeout(() => {
+          wordIndex.current = (wordIndex.current + 1) % words.length
+          setPhase('typing')
+        }, 0)
+        return () => clearTimeout(timer)
       }
     }
   }, [text, phase, words, typingSpeed, deletingSpeed, pauseMs])

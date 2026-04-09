@@ -4,13 +4,22 @@ import { useEffect, useState } from 'react'
 import Particles, { initParticlesEngine } from '@tsparticles/react'
 import { loadSlim } from '@tsparticles/slim'
 
+let enginePromise: Promise<void> | null = null
+
+function getEngine(): Promise<void> {
+  if (!enginePromise) {
+    enginePromise = initParticlesEngine(async (engine) => {
+      await loadSlim(engine)
+    })
+  }
+  return enginePromise
+}
+
 export function ParticlesBackground() {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine)
-    }).then(() => setReady(true))
+    getEngine().then(() => setReady(true))
   }, [])
 
   if (!ready) return null
