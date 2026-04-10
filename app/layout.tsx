@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     images: [
       {
-        url: '/avatar.png',
+        url: `${BASE_URL}/avatar.png`,
         width: 256,
         height: 256,
         alt: 'Jonatas Dantas — Senior Software Engineer',
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     title: 'Jonatas Dantas — Senior Software Engineer',
     description:
       'Senior Software Engineer with 7 years of experience in TypeScript, Node.js, React, and AWS. Currently Dev Lead at Orbital (UK fintech).',
-    images: ['/avatar.png'],
+    images: [`${BASE_URL}/avatar.png`],
   },
 }
 
