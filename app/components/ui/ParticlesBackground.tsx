@@ -20,6 +20,7 @@ export function ParticlesBackground() {
   const [ready, setReady] = useState(false)
   const containerRef = useRef<Container | undefined>(undefined)
   const wrapperRef = useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState(true)
 
   useEffect(() => {
     getEngine().then(() => setReady(true))
@@ -48,17 +49,20 @@ export function ParticlesBackground() {
     observer.observe(wrapper)
 
     const handleVisibility = () => {
-      if (document.hidden) {
-        containerRef.current?.pause()
-      } else {
-        containerRef.current?.play()
-      }
+      if (!wrapperRef.current) return;
+
+      const rect = wrapperRef.current.getBoundingClientRect()
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight
+
+      // Check if container is at least partially in the viewport
+      const isVisible = rect.top < windowHeight && rect.bottom > 0;
+      setIsVisible(isVisible)
     }
-    document.addEventListener('visibilitychange', handleVisibility)
+    document.addEventListener('scroll', handleVisibility)
 
     return () => {
       observer.disconnect()
-      document.removeEventListener('visibilitychange', handleVisibility)
+      document.removeEventListener('scroll', handleVisibility)
     }
   }, [ready])
 
@@ -66,6 +70,7 @@ export function ParticlesBackground() {
 
   return (
     <div ref={wrapperRef} className="absolute inset-0 z-0">
+      {isVisible && (
       <Particles
         id="hero-particles"
         className="absolute inset-0"
@@ -96,6 +101,7 @@ export function ParticlesBackground() {
           },
         }}
       />
+    )}
     </div>
   )
 }
